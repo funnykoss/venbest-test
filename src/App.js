@@ -1,13 +1,10 @@
-/* eslint-disable react/jsx-no-duplicate-props */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 
 import React from 'react';
 import { useState, useEffect } from 'react';
 import s from './App.css';
 import * as usersApi from './services/usersApi';
-// import Users from './components/Users';
-// import shortid from 'shortid';
 
 import Filter from './components/Filter';
 import UsersList from './components/UsersList';
@@ -15,46 +12,47 @@ import UsersList from './components/UsersList';
 function App() {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState('');
-  const [checkedUsers, setCheckedUsers] = useState(false);
-  const [male, setMale] = useState(false);
-  const [female, setFemale] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     usersApi.getUsers().then(({ data }) => setUsers(data));
   }, []);
-  const onChange = event => {
-    setFilter(event.target.value);
+
+  const handleClick = event => {
+    console.log(event.target.name);
   };
 
-  const handleChange = event => {
-    console.log(event.currentTarget.value);
-    setCheckedUsers(event.currentTarget.checked);
-  };
-  const genderFilter = event => {
-    switch (event.currentTarget.value) {
-      case 'male':
-        setMale(users.filter(user => user.sex === 'm'));
-
+  const onInputChange = event => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'name':
+        setFilter(value);
         break;
-      case 'female':
-        setMale(users.filter(user => user.sex === 'f'));
 
+      case 'lastname':
+        setFilter(value);
+        break;
+
+      case 'age':
+        setFilter(value);
         break;
       default:
         return;
     }
   };
-  const normalizeContacts = filter.toLowerCase();
+
+  const normalizeName = filter.toLowerCase();
   const ageUsers = Number(filter);
   const filterUsers = users.filter(
     user =>
-      user.name.toLowerCase().includes(normalizeContacts) ||
+      user.name.toLowerCase().includes(normalizeName) ||
+      user.lastname.toLowerCase().includes(normalizeName) ||
       user.age === ageUsers,
   );
 
   return (
     <section className={s.section}>
-      <Filter value={filter} onChange={onChange} handleChange={handleChange} />
+      <Filter value={filter} onChange={onInputChange} onClick={handleClick} />
       {users && <UsersList users={filterUsers} />}
     </section>
   );
