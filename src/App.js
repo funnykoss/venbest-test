@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
-import s from './App.css';
+import s from './App.module.css';
 import * as usersApi from './services/usersApi';
 
 import Filter from './components/Filter';
@@ -38,15 +38,12 @@ function App() {
   };
 
   const getFilter = () => {
-    console.log(gender);
     if (gender === 'male') {
       const maleFilter = users.filter(user => user.sex === 'm');
-      console.log(maleFilter);
       return maleFilter;
     }
     if (gender === 'female') {
       const femaleFilter = users.filter(user => user.sex === 'f');
-      console.log(femaleFilter);
       return femaleFilter;
     }
   };

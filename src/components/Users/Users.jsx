@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 
 import s from './Users.module.css'
 
@@ -15,4 +17,11 @@ import s from './Users.module.css'
     )
  }
 
- export default Users
+export default Users
+ 
+Users.prototype = {
+    name:PropTypes.string,
+    lastname:PropTypes.string,
+    age: PropTypes.number,
+    sex:PropTypes.string, 
+}
