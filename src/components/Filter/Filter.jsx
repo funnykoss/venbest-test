@@ -3,7 +3,7 @@ import { useState } from 'react';
 import shortid from 'shortid';
 import s from './Filter.module.css'
 
-const Filter = ({ name, lastname, age, onChange, handleClick,checked }) => {
+const Filter = ({ name, lastname, age, onChange, onClick,checked }) => {
 
   
     return (
@@ -51,8 +51,8 @@ const Filter = ({ name, lastname, age, onChange, handleClick,checked }) => {
                     <input
                     value="male"
                     type="checkbox"
-                            onClick={handleClick}
-                            checked={checked}
+                            onChange={onClick}
+                            // checked={checked}
                     />
                 </label>
                 <label>
@@ -60,8 +60,8 @@ const Filter = ({ name, lastname, age, onChange, handleClick,checked }) => {
                     <input
                     value="female"
                     type="checkbox"
-                            onClick={handleClick}
-                            checked={checked}
+                            onChange={onClick}
+                            // checked={checked}
                     />
                 </label>
             </div>
